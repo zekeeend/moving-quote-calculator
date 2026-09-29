@@ -71,39 +71,15 @@
       } catch(e) {}
     })();
   </script>
-
-  <style>
-    :root {
-      --brand-color: #059669;
-      --brand-hover: #059669;
-      --primary: #059669;
-    }
-    .tab-btn.active, .preset-pill.active, .btn-submit, .pill-value {
-      background: #059669 !important;
-    }
-    .brand-icon, .price-val {
-      color: #059669 !important;
-    }
-  </style>
-  <script>
-    window.OMNI_CONFIG = {
-      brand: 'Dynamic Movers NYC',
-      phone: '12122036365',
-      multiplier: 1.0,
-      currency: '$',
-      color: '#059669'
-    };
-  </script>
-
 </head>
 <body class="light-theme">
   <!-- Clean Top Navigation Bar -->
   <header class="header">
     <div class="container header-container">
       <div class="brand-group">
-        <div class="brand-avatar" id="brand-avatar-box">
-          <i data-lucide="truck" id="brand-lucide-icon" class="brand-icon"></i>
-          <img src="" alt="Brand Logo" id="brand-logo-img" class="brand-logo-img" style="display: none;">
+        <div class="brand-avatar" id="brand-avatar-box" style="background: #ffffff; padding: 4px; border: 1px solid rgba(0,0,0,0.12);">
+          <i data-lucide="truck" id="brand-lucide-icon" class="brand-icon" style="display: none;"></i>
+          <img src="logo.png" alt="Dynamic Movers NYC Logo" id="brand-logo-img" class="brand-logo-img" style="display: block; width: 100%; height: 100%; object-fit: contain;">
         </div>
         <div>
           <div class="brand-title-row">
@@ -411,11 +387,11 @@
               <div class="input-row">
                 <div class="input-group flex-1">
                   <label class="field-label">Pickup City/Zip</label>
-                  <input type="text" id="cust-from" placeholder="e.g. Austin, TX" class="text-input">
+                  <input type="text" id="cust-from" placeholder="e.g. New York, NY" class="text-input">
                 </div>
                 <div class="input-group flex-1">
                   <label class="field-label">Delivery City/Zip</label>
-                  <input type="text" id="cust-to" placeholder="e.g. Dallas, TX" class="text-input">
+                  <input type="text" id="cust-to" placeholder="e.g. Brooklyn, NY" class="text-input">
                 </div>
               </div>
 
@@ -481,7 +457,7 @@
 
   <footer class="footer">
     <div class="container footer-content">
-      <p id="footer-copy">© 2026 <span id="footer-brand">Professional Moving & Relocation</span>. All rights reserved.</p>
+      <p id="footer-copy">&copy; 2026 <span id="footer-brand">Dynamic Movers NYC</span>. All rights reserved.</p>
       <div class="footer-links">
         <span>Privacy Policy</span> • <span>Terms of Service</span> • 
         <span class="status-live"><span class="pulse-dot"></span> Dispatch Center Active</span>
@@ -510,5 +486,21 @@
       }
     });
   </script>
+<script>
+(function() {
+  function forcePlay() {
+    var v = document.getElementById('hero-bg-video');
+    if (v) {
+      v.muted = true;
+      v.setAttribute('playsinline', '');
+      v.play().catch(function() {});
+    }
+  }
+  document.addEventListener('DOMContentLoaded', forcePlay);
+  window.addEventListener('load', forcePlay);
+  document.addEventListener('touchstart', forcePlay, { once: true });
+  document.addEventListener('click', forcePlay, { once: true });
+})();
+</script>
 </body>
 </html>
