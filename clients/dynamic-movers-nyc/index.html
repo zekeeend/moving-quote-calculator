@@ -458,116 +458,13 @@
   <!-- ======================================================== -->
   <!-- ⚡ ZERO-QUOTA SHADCN BRAND SWITCHER DRAWER               -->
   <!-- ======================================================== -->
-  <aside id="brand-switcher-drawer" class="switcher-drawer">
-    <div class="drawer-header">
-      <div class="drawer-title-group">
-        <div class="drawer-icon-circle"><i data-lucide="palette"></i></div>
-        <div>
-          <h4 class="drawer-title">Brand Switcher</h4>
-          <span class="drawer-subtitle">Instant Zero-Token Client Customizer</span>
-        </div>
-      </div>
-      <button type="button" id="close-drawer-btn" class="drawer-close"><i data-lucide="x"></i></button>
-    </div>
-
-    <div class="drawer-body">
-      <!-- 1-Click Presets -->
-      <div class="control-group">
-        <label class="control-label">1-Click Live Demos</label>
-        <div class="preset-stack">
-          <button type="button" class="preset-pill" data-preset="texas">
-            <span class="pill-badge">US</span>
-            <div><strong>Lone Star Moving Pro</strong> — Austin, TX</div>
-          </button>
-          <button type="button" class="preset-pill" data-preset="sydney">
-            <span class="pill-badge">AU</span>
-            <div><strong>Pacific Coast Removals</strong> — Sydney, AU</div>
-          </button>
-          <button type="button" class="preset-pill" data-preset="london">
-            <span class="pill-badge">UK</span>
-            <div><strong>Kensington Haulers</strong> — London, UK</div>
-          </button>
-          <button type="button" class="preset-pill" data-preset="manila">
-            <span class="pill-badge">PH</span>
-            <div><strong>Metro Manila Lipat-Bahay</strong> — QC, PH</div>
-          </button>
-        </div>
-      </div>
-
-      <div class="drawer-divider"></div>
-
-      <!-- Custom Inputs -->
-      <div class="control-group">
-        <label class="control-label">Company Name</label>
-        <input type="text" id="config-biz-name" class="control-input" value="">
-      </div>
-
-      <div class="control-group">
-        <label class="control-label">Tagline</label>
-        <input type="text" id="config-biz-tagline" class="control-input" value="Licensed, Insured & Trusted Professional Moving Services">
-      </div>
-
-      <div class="control-row">
-        <div class="control-group flex-1">
-          <label class="control-label">Phone Number</label>
-          <input type="text" id="config-biz-phone" class="control-input" value="(800) 555-0199">
-        </div>
-        <div class="control-group flex-1">
-          <label class="control-label">Currency</label>
-          <select id="config-currency" class="control-select">
-            <option value="$" selected>USD ($)</option>
-            <option value="AU$">AUD (AU$)</option>
-            <option value="£">GBP (£)</option>
-            <option value="₱">PHP (₱)</option>
-            <option value="€">EUR (€)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="control-row">
-        <div class="control-group flex-1">
-          <label class="control-label">Brand Color</label>
-          <div class="color-picker-box">
-            <input type="color" id="config-color" value="#059669" class="native-color-picker">
-            <span id="color-hex-val">#059669</span>
-          </div>
-        </div>
-        <div class="control-group flex-1">
-          <label class="control-label">Logo (Emoji or URL)</label>
-          <input type="text" id="config-logo" class="control-input" placeholder="truck or https://...">
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label class="control-label">Hourly Rate Multiplier</label>
-        <input type="range" id="config-rate-slider" min="0.6" max="1.8" step="0.05" value="1.0" class="clean-slider">
-        <div class="multiplier-tag">Rate Scale: <strong id="multiplier-val">1.00x</strong></div>
-      </div>
-
-      <div class="drawer-actions">
-        <button type="button" id="apply-branding-btn" class="btn-apply-rebrand">
-          <i data-lucide="check"></i> Apply Rebrand
-        </button>
-        <button type="button" id="copy-demo-link-btn" class="btn-copy-url">
-          <i data-lucide="link"></i> Copy Client Demo Link
-        </button>
-      </div>
-
-      <div class="tip-box">
-        <i data-lucide="lightbulb" class="tip-icon"></i>
-        <span><strong>Pro Tip:</strong> Rebrand in 5 seconds, open Loom or hit <code>Win + G</code>, and record a 20-second walk-through for the owner!</span>
-      </div>
-    </div>
-  </aside>
+  
 
   <!-- Clean Floating Button to Open Switcher -->
-  <button type="button" id="toggle-drawer-btn" class="floating-btn" title="Rebrand Prototype">
-    <i data-lucide="sliders" class="float-icon"></i>
-    <span>Rebrand Demo</span>
-  </button>
+  
 
   <script src="../../js/calculator.js?v=2.1.0"></script>
-  <script src="../../js/brand-switcher.js?v=2.1.0"></script>
+  
   <script>
     // Initialize Lucide SVG Icons
     document.addEventListener('DOMContentLoaded', () => {
