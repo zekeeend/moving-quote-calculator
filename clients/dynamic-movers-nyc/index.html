@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">Instant Moving Quote Calculator</title>
+  <title id="page-title">Dynamic Movers NYC — Instant Moving Quote Calculator</title>
   <!-- Google Fonts: Plus Jakarta Sans & Inter for clean modern typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,6 +61,31 @@
       } catch(e) {}
     })();
   </script>
+
+  <script>
+    window.__CLIENT_BRAND__ = 'Dynamic Movers NYC';
+    window.__CLIENT_PHONE__ = '(212) 203-6365';
+    window.__CLIENT_LOGO__ = 'https://dynamicmoversnyc.com/wp-content/themes/dynamicmovers/images/logo.png';
+    document.addEventListener('DOMContentLoaded', function() {
+      const img = document.getElementById('brand-logo-img');
+      const icon = document.getElementById('brand-lucide-icon');
+      const box = document.getElementById('brand-avatar-box');
+      if (img) {
+        img.src = 'https://dynamicmoversnyc.com/wp-content/themes/dynamicmovers/images/logo.png';
+        img.style.display = 'block';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'contain';
+        if (icon) icon.style.display = 'none';
+        if (box) {
+          box.style.background = '#ffffff';
+          box.style.padding = '4px';
+          box.style.border = '1px solid rgba(255,255,255,0.2)';
+        }
+      }
+    });
+  </script>
+
 </head>
 <body class="light-theme">
   <!-- Clean Top Navigation Bar -->
@@ -73,12 +98,12 @@
         </div>
         <div>
           <div class="brand-title-row">
-            <h1 class="brand-name" id="brand-name"></h1>
+            <h1 class="brand-name" id="brand-name">Dynamic Movers NYC</h1>
             <span class="verified-badge">
               <i data-lucide="check-circle" class="badge-icon"></i> Verified Mover
             </span>
           </div>
-          <p class="brand-tagline" id="brand-tagline">Licensed, Insured & Trusted Professional Moving Services</p>
+          <p class="brand-tagline" id="brand-tagline">NYC's Top-Rated Licensed & Insured Moving Specialists</p>
         </div>
       </div>
 
@@ -93,9 +118,9 @@
           </div>
           <span class="rating-label"><strong>4.9/5</strong> (420+ Verified Moves)</span>
         </div>
-        <a href="tel:12122036365" class="btn-call" id="brand-phone-btn">
+        <a href="tel:18005550199" class="btn-call" id="brand-phone-btn" href="tel:12122036365">
           <i data-lucide="phone-call" class="btn-icon"></i>
-          <span id="brand-phone-text"></span>
+          <span id="brand-phone-text">(212) 203-6365</span>
         </a>
       </div>
     </div>
@@ -106,7 +131,7 @@
     <section class="hero-video-section">
       <div class="video-container">
         <video autoplay muted loop playsinline class="hero-bg-video" id="hero-bg-video">
-          <source src="videos/trucking-hero.mp4" type="video/mp4"><source src="../../videos/trucking-hero.mp4" type="video/mp4">
+          <source src="../../videos/trucking-hero.mp4" type="video/mp4">
         </video>
         <!-- Modern Dark/Frosted Scrim for Text Contrast -->
         <div class="video-scrim"></div>
@@ -461,10 +486,13 @@
   
 
   <!-- Clean Floating Button to Open Switcher -->
-  
+  <button type="button" id="toggle-drawer-btn" class="floating-btn" title="Rebrand Prototype">
+    <i data-lucide="sliders" class="float-icon"></i>
+    <span>Rebrand Demo</span>
+  </button>
 
   <script src="../../js/calculator.js?v=2.1.0"></script>
-  
+  <script src="../../js/brand-switcher.js?v=2.1.0"></script>
   <script>
     // Initialize Lucide SVG Icons
     document.addEventListener('DOMContentLoaded', () => {
