@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Instant Moving Quote Calculator</title>
+  <!-- Google Fonts: Plus Jakarta Sans & Inter for clean modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css?v=2.1.0">
+  <!-- Instant Synchronous Brand Injector (Prevents First-Frame Flicker) -->
+  <script>
+    (function() {
+      try {
+        const p = new URLSearchParams(window.location.search);
+        const b = p.get('brand');
+        const ph = p.get('phone');
+        const lg = p.get('logo');
+        window.__PRELOADED_BRAND__ = b;
+        window.__PRELOADED_PHONE__ = ph;
+        window.__PRELOADED_LOGO__ = lg;
+
+        document.addEventListener('DOMContentLoaded', function() {
+          if (b) {
+            const nameEl = document.getElementById('brand-name');
+            if (nameEl) nameEl.textContent = b;
+            const fb = document.getElementById('footer-brand');
+            if (fb) fb.textContent = b;
+            const cfg = document.getElementById('config-biz-name');
+            if (cfg) cfg.value = b;
+            document.title = b + ' | Instant Moving Cost Calculator';
+          }
+          if (ph) {
+            const pe = document.getElementById('brand-phone-text');
+            if (pe) pe.textContent = ph;
+            const pb = document.getElementById('brand-phone-btn');
+            if (pb) pb.href = 'tel:' + ph;
+          }
+          if (lg) {
+            const img = document.getElementById('brand-logo-img');
+            const icon = document.getElementById('brand-lucide-icon');
+            const box = document.getElementById('brand-avatar-box');
+            if (img) {
+              img.src = lg;
+              img.style.display = 'block';
+              img.style.width = '100%';
+              img.style.height = '100%';
+              img.style.objectFit = 'contain';
+              if (icon) icon.style.display = 'none';
+              if (box) {
+                box.style.background = '#ffffff';
+                box.style.padding = '3px';
+                box.style.border = '1px solid rgba(0,0,0,0.12)';
+              }
+            }
+          }
+        });
+      } catch(e) {}
+    })();
+  </script>
+</head>
+<body class="light-theme">
+  <!-- Clean Top Navigation Bar -->
+  <header class="header">
+    <div class="container header-container">
+      <div class="brand-group">
+        <div class="brand-avatar" id="brand-avatar-box">
+          <i data-lucide="truck" id="brand-lucide-icon" class="brand-icon"></i>
+          <img src="" alt="Brand Logo" id="brand-logo-img" class="brand-logo-img" style="display: none;">
+        </div>
+        <div>
+          <div class="brand-title-row">
+            <h1 class="brand-name" id="brand-name"></h1>
+            <span class="verified-badge">
+              <i data-lucide="check-circle" class="badge-icon"></i> Verified Mover
+            </span>
+          </div>
+          <p class="brand-tagline" id="brand-tagline">Licensed, Insured & Trusted Professional Moving Services</p>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="rating-box">
+          <div class="stars">
+            <i data-lucide="star" class="star filled"></i>
+            <i data-lucide="star" class="star filled"></i>
+            <i data-lucide="star" class="star filled"></i>
+            <i data-lucide="star" class="star filled"></i>
+            <i data-lucide="star" class="star filled"></i>
+          </div>
+          <span class="rating-label"><strong>4.9/5</strong> (420+ Verified Moves)</span>
+        </div>
+        <a href="tel:18005550199" class="btn-call" id="brand-phone-btn">
+          <i data-lucide="phone-call" class="btn-icon"></i>
+          <span id="brand-phone-text"></span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Cinematic Video Montage Hero Section -->
+    <section class="hero-video-section">
+      <div class="video-container">
+        <video autoplay muted loop playsinline class="hero-bg-video" id="hero-bg-video">
+          <source src="videos/trucking-hero.mp4" type="video/mp4">
+        </video>
+        <!-- Modern Dark/Frosted Scrim for Text Contrast -->
+        <div class="video-scrim"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="badge-banner-frosted">
+          <i data-lucide="sparkles" class="banner-icon"></i>
+          <span>Transparent Pricing • 60-Second Ballpark Estimate</span>
+        </div>
+        <h2 class="hero-title-cinematic">Instant Moving Cost Calculator</h2>
+        <p class="hero-subtitle-cinematic">Get an accurate, instant ballpark quote for your upcoming move. Select your home size and distance below to calculate your estimated rate in real time.</p>
+      </div>
+    </section>
+
+    <!-- Main Calculator Two-Column Workspace -->
+    <section class="calculator-section">
+      <div class="container calc-grid">
+        
+        <!-- Left Column: Steps Form -->
+        <div class="steps-column">
+
+          <!-- Step 1: Move Type Tabs -->
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-badge">1</span>
+              <div>
+                <h3 class="step-title">Select Moving Type</h3>
+                <p class="step-desc">Choose between local within-metro moving or long-distance hauling.</p>
+              </div>
+            </div>
+
+            <div class="tabs-container" id="move-type-group">
+              <button type="button" class="tab-btn active" data-type="local">
+                <i data-lucide="map-pin" class="tab-icon"></i>
+                <div class="tab-text">
+                  <span class="tab-title">Local Move</span>
+                  <span class="tab-sub">Within 50 Miles / Same Metro</span>
+                </div>
+                <div class="tab-check"><i data-lucide="check"></i></div>
+              </button>
+              <button type="button" class="tab-btn" data-type="long_distance">
+                <i data-lucide="navigation" class="tab-icon"></i>
+                <div class="tab-text">
+                  <span class="tab-title">Long Distance</span>
+                  <span class="tab-sub">Interstate / Across Region</span>
+                </div>
+                <div class="tab-check"><i data-lucide="check"></i></div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Home / Office Size (Shadcn-style Card Selector) -->
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-badge">2</span>
+              <div>
+                <h3 class="step-title">Home or Office Size</h3>
+                <p class="step-desc">Select the size of your space to estimate crew size and truck capacity.</p>
+              </div>
+            </div>
+
+            <div class="bento-grid" id="home-size-group">
+              <button type="button" class="bento-card" data-size="studio" data-hours="2.5" data-crew="2" data-base="320">
+                <div class="bento-top">
+                  <div class="icon-circle"><i data-lucide="box"></i></div>
+                  <div class="card-radio"></div>
+                </div>
+                <span class="bento-name">Studio / 1-Bed</span>
+                <span class="bento-detail">2 Movers • 16ft Truck</span>
+              </button>
+
+              <button type="button" class="bento-card active" data-size="2bed" data-hours="4" data-crew="3" data-base="580">
+                <div class="bento-top">
+                  <div class="icon-circle"><i data-lucide="home"></i></div>
+                  <div class="top-badge-group">
+                    <span class="popular-tag">Most Popular</span>
+                    <div class="card-radio"></div>
+                  </div>
+                </div>
+                <span class="bento-name">2 - 3 Bedroom</span>
+                <span class="bento-detail">3 Movers • 24ft Truck</span>
+              </button>
+
+              <button type="button" class="bento-card" data-size="4bed" data-hours="6.5" data-crew="4" data-base="950">
+                <div class="bento-top">
+                  <div class="icon-circle"><i data-lucide="building"></i></div>
+                  <div class="card-radio"></div>
+                </div>
+                <span class="bento-name">4+ Bedroom Home</span>
+                <span class="bento-detail">4 Movers • 26ft Truck</span>
+              </button>
+
+              <button type="button" class="bento-card" data-size="commercial" data-hours="8" data-crew="5" data-base="1400">
+                <div class="bento-top">
+                  <div class="icon-circle"><i data-lucide="building-2"></i></div>
+                  <div class="card-radio"></div>
+                </div>
+                <span class="bento-name">Commercial / Office</span>
+                <span class="bento-detail">5+ Movers • Heavy Fleet</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Distance Slider -->
+          <div class="step-card">
+            <div class="step-header-with-value">
+              <div class="step-header">
+                <span class="step-badge">3</span>
+                <div>
+                  <h3 class="step-title">Estimated Moving Distance</h3>
+                  <p class="step-desc">Slide to adjust the driving distance between pickup and dropoff.</p>
+                </div>
+              </div>
+              <div class="pill-value" id="distance-display">25 Miles</div>
+            </div>
+
+            <div class="slider-container">
+              <input type="range" id="distance-slider" min="5" max="800" value="25" step="5" class="clean-slider">
+              <div class="slider-markers">
+                <span>5 mi (Local)</span>
+                <span>150 mi (Regional)</span>
+                <span>400 mi (Interstate)</span>
+                <span>800+ mi (Cross-Country)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Value-Add Services -->
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-badge">4</span>
+              <div>
+                <h3 class="step-title">Additional Services</h3>
+                <p class="step-desc">Select any specialized services you need for your move.</p>
+              </div>
+            </div>
+
+            <div class="services-list">
+              <label class="service-row">
+                <input type="checkbox" id="service-packing" class="service-checkbox" data-cost="180">
+                <div class="service-body">
+                  <div class="service-icon-box"><i data-lucide="package-check"></i></div>
+                  <div class="service-meta">
+                    <span class="service-title">Full Packing & Wrapping Supplies</span>
+                    <span class="service-sub">Includes heavy-duty boxes, bubble wrap, tape & furniture padding</span>
+                  </div>
+                  <span class="service-fee">+<span class="currency-symbol">$</span>180</span>
+                </div>
+              </label>
+
+              <label class="service-row">
+                <input type="checkbox" id="service-piano" class="service-checkbox" data-cost="150">
+                <div class="service-body">
+                  <div class="service-icon-box"><i data-lucide="shield-alert"></i></div>
+                  <div class="service-meta">
+                    <span class="service-title">Specialty Items (Piano, Safe, Heavy Fitness)</span>
+                    <span class="service-sub">Heavy rigging equipment, floor runners, and reinforced straps</span>
+                  </div>
+                  <span class="service-fee">+<span class="currency-symbol">$</span>150</span>
+                </div>
+              </label>
+
+              <label class="service-row">
+                <input type="checkbox" id="service-stairs" class="service-checkbox" data-cost="80">
+                <div class="service-body">
+                  <div class="service-icon-box"><i data-lucide="layers"></i></div>
+                  <div class="service-meta">
+                    <span class="service-title">Multiple Flights of Stairs / No Elevator</span>
+                    <span class="service-sub">Dedicated crew stair-carry surcharge</span>
+                  </div>
+                  <span class="service-fee">+<span class="currency-symbol">$</span>80</span>
+                </div>
+              </label>
+
+              <label class="service-row">
+                <input type="checkbox" id="service-storage" class="service-checkbox" data-cost="220">
+                <div class="service-body">
+                  <div class="service-icon-box"><i data-lucide="warehouse"></i></div>
+                  <div class="service-meta">
+                    <span class="service-title">30-Day Climate-Controlled Storage</span>
+                    <span class="service-sub">Secure warehouse holding until your new home is ready</span>
+                  </div>
+                  <span class="service-fee">+<span class="currency-symbol">$</span>220</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Sticky Clean Receipt & Booking Card -->
+        <div class="receipt-column">
+          <div class="receipt-card">
+            
+            <div class="receipt-top">
+              <span class="receipt-tag">ESTIMATED BALLPARK QUOTE</span>
+              <div class="price-display">
+                <span class="currency-symbol" id="summary-currency">$</span>
+                <span class="price-val" id="price-low">580</span>
+                <span class="price-sep">–</span>
+                <span class="currency-symbol" id="summary-currency-high">$</span>
+                <span class="price-val" id="price-high">790</span>
+              </div>
+              <div class="time-estimate">
+                <i data-lucide="clock" class="time-icon"></i>
+                <span id="hours-display">Estimated: 3.5 – 5 Hours</span>
+              </div>
+            </div>
+
+            <!-- Receipt Breakdown Rows -->
+            <div class="breakdown-box">
+              <div class="b-row">
+                <span class="b-label"><i data-lucide="users" class="row-icon"></i> Crew Assigned</span>
+                <span class="b-value" id="crew-summary">3 Movers • 24ft Truck</span>
+              </div>
+              <div class="b-row">
+                <span class="b-label"><i data-lucide="map-pin" class="row-icon"></i> Move Scope</span>
+                <span class="b-value" id="scope-summary">Local Move (25 Miles)</span>
+              </div>
+              <div class="b-row">
+                <span class="b-label"><i data-lucide="fuel" class="row-icon"></i> Travel & Fuel</span>
+                <span class="b-value" id="travel-summary">Included</span>
+              </div>
+              <div class="b-row" id="addons-row" style="display: none;">
+                <span class="b-label"><i data-lucide="plus-circle" class="row-icon"></i> Selected Add-ons</span>
+                <span class="b-value" id="addons-summary">None</span>
+              </div>
+            </div>
+
+            <!-- Trust / Guarantee Badge -->
+            <div class="trust-banner">
+              <i data-lucide="shield-check" class="trust-icon"></i>
+              <div class="trust-text">
+                <strong>Price Lock Promise:</strong> Transparent pricing with zero hidden staircase fees or surprise fuel charges on move day.
+              </div>
+            </div>
+
+            <!-- Lead Capture Form -->
+            <form id="quote-lock-form" class="booking-form">
+              <h4 class="form-heading">Lock In This Quote & Check Dates</h4>
+              
+              <div class="input-group">
+                <label class="field-label">Your Name</label>
+                <div class="input-with-icon">
+                  <i data-lucide="user" class="input-icon"></i>
+                  <input type="text" id="cust-name" placeholder="First & Last Name" required class="text-input">
+                </div>
+              </div>
+
+              <div class="input-row">
+                <div class="input-group flex-1">
+                  <label class="field-label">Mobile Phone</label>
+                  <div class="input-with-icon">
+                    <i data-lucide="phone" class="input-icon"></i>
+                    <input type="tel" id="cust-phone" placeholder="(555) 000-0000" required class="text-input">
+                  </div>
+                </div>
+                <div class="input-group flex-1">
+                  <label class="field-label">Move Date</label>
+                  <div class="input-with-icon">
+                    <i data-lucide="calendar" class="input-icon"></i>
+                    <input type="date" id="cust-date" required class="text-input">
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-row">
+                <div class="input-group flex-1">
+                  <label class="field-label">Pickup City/Zip</label>
+                  <input type="text" id="cust-from" placeholder="e.g. Austin, TX" class="text-input">
+                </div>
+                <div class="input-group flex-1">
+                  <label class="field-label">Delivery City/Zip</label>
+                  <input type="text" id="cust-to" placeholder="e.g. Dallas, TX" class="text-input">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit" id="btn-submit-quote">
+                <span>Lock In Rate & Check Availability</span>
+                <i data-lucide="arrow-right" class="btn-arrow"></i>
+              </button>
+
+              <div class="quick-cta-row">
+                <button type="button" class="btn-quick-wa" id="btn-whatsapp-quote">
+                  <i data-lucide="message-circle" class="btn-icon"></i> Chat on WhatsApp
+                </button>
+                <button type="button" class="btn-quick-sms" id="btn-sms-quote">
+                  <i data-lucide="smartphone" class="btn-icon"></i> Text Quote to Phone
+                </button>
+              </div>
+
+              <div class="form-trust-footer">
+                <i data-lucide="lock" class="lock-icon"></i>
+                <span>Zero Spam Promise • 100% Free Quote • No Card Needed</span>
+              </div>
+            </form>
+
+            <div id="quote-success-msg" class="success-box" style="display: none;">
+              <div class="success-badge"><i data-lucide="check-check"></i></div>
+              <h4 class="success-title">Quote Locked In!</h4>
+              <p class="success-desc">We have registered your estimate (<span id="success-estimate">$580–$790</span>). A dispatch manager will text you within 15 minutes to confirm crew availability!</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Clean Features Bar -->
+    <section class="trust-section">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <div class="trust-circle"><i data-lucide="award"></i></div>
+          <div>
+            <h5 class="trust-head">Fully Licensed & Insured</h5>
+            <p class="trust-sub">DOT Registered commercial carrier with complete transit cargo protection.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-circle"><i data-lucide="badge-dollar-sign"></i></div>
+          <div>
+            <h5 class="trust-head">No Hidden Fees</h5>
+            <p class="trust-sub">Transparent hourly and flat-rate mileage estimates with zero surprise surcharges.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-circle"><i data-lucide="clock-3"></i></div>
+          <div>
+            <h5 class="trust-head">On-Time Arrival Guarantee</h5>
+            <p class="trust-sub">Prompt dispatch with live GPS tracking notifications on your moving day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p id="footer-copy">© 2026 <span id="footer-brand">Professional Moving & Relocation</span>. All rights reserved.</p>
+      <div class="footer-links">
+        <span>Privacy Policy</span> • <span>Terms of Service</span> • 
+        <span class="status-live"><span class="pulse-dot"></span> Dispatch Center Active</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- ⚡ ZERO-QUOTA SHADCN BRAND SWITCHER DRAWER               -->
+  <!-- ======================================================== -->
+  <aside id="brand-switcher-drawer" class="switcher-drawer">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <div class="drawer-icon-circle"><i data-lucide="palette"></i></div>
+        <div>
+          <h4 class="drawer-title">Brand Switcher</h4>
+          <span class="drawer-subtitle">Instant Zero-Token Client Customizer</span>
+        </div>
+      </div>
+      <button type="button" id="close-drawer-btn" class="drawer-close"><i data-lucide="x"></i></button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- 1-Click Presets -->
+      <div class="control-group">
+        <label class="control-label">1-Click Live Demos</label>
+        <div class="preset-stack">
+          <button type="button" class="preset-pill" data-preset="texas">
+            <span class="pill-badge">US</span>
+            <div><strong>Lone Star Moving Pro</strong> — Austin, TX</div>
+          </button>
+          <button type="button" class="preset-pill" data-preset="sydney">
+            <span class="pill-badge">AU</span>
+            <div><strong>Pacific Coast Removals</strong> — Sydney, AU</div>
+          </button>
+          <button type="button" class="preset-pill" data-preset="london">
+            <span class="pill-badge">UK</span>
+            <div><strong>Kensington Haulers</strong> — London, UK</div>
+          </button>
+          <button type="button" class="preset-pill" data-preset="manila">
+            <span class="pill-badge">PH</span>
+            <div><strong>Metro Manila Lipat-Bahay</strong> — QC, PH</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer-divider"></div>
+
+      <!-- Custom Inputs -->
+      <div class="control-group">
+        <label class="control-label">Company Name</label>
+        <input type="text" id="config-biz-name" class="control-input" value="">
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Tagline</label>
+        <input type="text" id="config-biz-tagline" class="control-input" value="Licensed, Insured & Trusted Professional Moving Services">
+      </div>
+
+      <div class="control-row">
+        <div class="control-group flex-1">
+          <label class="control-label">Phone Number</label>
+          <input type="text" id="config-biz-phone" class="control-input" value="(800) 555-0199">
+        </div>
+        <div class="control-group flex-1">
+          <label class="control-label">Currency</label>
+          <select id="config-currency" class="control-select">
+            <option value="$" selected>USD ($)</option>
+            <option value="AU$">AUD (AU$)</option>
+            <option value="£">GBP (£)</option>
+            <option value="₱">PHP (₱)</option>
+            <option value="€">EUR (€)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-group flex-1">
+          <label class="control-label">Brand Color</label>
+          <div class="color-picker-box">
+            <input type="color" id="config-color" value="#059669" class="native-color-picker">
+            <span id="color-hex-val">#059669</span>
+          </div>
+        </div>
+        <div class="control-group flex-1">
+          <label class="control-label">Logo (Emoji or URL)</label>
+          <input type="text" id="config-logo" class="control-input" placeholder="truck or https://...">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Hourly Rate Multiplier</label>
+        <input type="range" id="config-rate-slider" min="0.6" max="1.8" step="0.05" value="1.0" class="clean-slider">
+        <div class="multiplier-tag">Rate Scale: <strong id="multiplier-val">1.00x</strong></div>
+      </div>
+
+      <div class="drawer-actions">
+        <button type="button" id="apply-branding-btn" class="btn-apply-rebrand">
+          <i data-lucide="check"></i> Apply Rebrand
+        </button>
+        <button type="button" id="copy-demo-link-btn" class="btn-copy-url">
+          <i data-lucide="link"></i> Copy Client Demo Link
+        </button>
+      </div>
+
+      <div class="tip-box">
+        <i data-lucide="lightbulb" class="tip-icon"></i>
+        <span><strong>Pro Tip:</strong> Rebrand in 5 seconds, open Loom or hit <code>Win + G</code>, and record a 20-second walk-through for the owner!</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Clean Floating Button to Open Switcher -->
+  <button type="button" id="toggle-drawer-btn" class="floating-btn" title="Rebrand Prototype">
+    <i data-lucide="sliders" class="float-icon"></i>
+    <span>Rebrand Demo</span>
+  </button>
+
+  <script src="js/calculator.js?v=2.1.0"></script>
+  <script src="js/brand-switcher.js?v=2.1.0"></script>
+  <script>
+    // Initialize Lucide SVG Icons
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
