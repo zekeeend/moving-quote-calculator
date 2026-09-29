@@ -139,7 +139,8 @@
     <!-- Cinematic Video Montage Hero Section -->
     <section class="hero-video-section">
       <div class="video-container">
-        <video autoplay muted loop playsinline class="hero-bg-video" id="hero-bg-video">
+        <video autoplay muted loop playsinline preload="auto" class="hero-bg-video" id="hero-bg-video">
+          <source src="videos/trucking-hero.mp4" type="video/mp4">
           <source src="../../videos/trucking-hero.mp4" type="video/mp4">
         </video>
         <!-- Modern Dark/Frosted Scrim for Text Contrast -->
@@ -510,5 +511,23 @@
       }
     });
   </script>
+
+<script>
+(function() {
+  function forcePlay() {
+    var v = document.getElementById('hero-bg-video');
+    if (v) {
+      v.muted = true;
+      v.setAttribute('playsinline', '');
+      v.play().catch(function() {});
+    }
+  }
+  document.addEventListener('DOMContentLoaded', forcePlay);
+  window.addEventListener('load', forcePlay);
+  document.addEventListener('touchstart', forcePlay, { once: true });
+  document.addEventListener('click', forcePlay, { once: true });
+})();
+</script>
+
 </body>
 </html>
