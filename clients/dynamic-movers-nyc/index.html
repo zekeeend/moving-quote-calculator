@@ -92,9 +92,8 @@
   <header class="header">
     <div class="container header-container">
       <div class="brand-group">
-        <div class="brand-avatar" id="brand-avatar-box">
-          <i data-lucide="truck" id="brand-lucide-icon" class="brand-icon"></i>
-          <img src="" alt="Brand Logo" id="brand-logo-img" class="brand-logo-img" style="display: none;">
+        <div class="brand-avatar" id="brand-avatar-box" style="background: #ffffff !important; padding: 5px !important; border-radius: 12px !important; display: flex !important; align-items: center !important; justify-content: center !important; width: 50px !important; height: 50px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;">
+          <img src="logo.png?v=2026.1" alt="Dynamic Movers NYC Logo" id="brand-logo-img" class="brand-logo-img" style="display: block !important; width: 100% !important; height: 100% !important; object-fit: contain !important;">
         </div>
         <div>
           <div class="brand-title-row">
@@ -503,3 +502,15 @@
   </script>
 </body>
 </html>
+<script>
+window.addEventListener('load', function() {
+  const box = document.getElementById('brand-avatar-box');
+  const img = document.getElementById('brand-logo-img');
+  const icon = document.getElementById('brand-lucide-icon');
+  if (icon) icon.remove();
+  if (img) {
+    img.src = 'logo.png?v=2026.1';
+    img.style.display = 'block';
+  }
+});
+</script>
