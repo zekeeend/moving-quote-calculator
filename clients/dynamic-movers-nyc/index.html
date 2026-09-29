@@ -18,7 +18,17 @@
         const p = new URLSearchParams(window.location.search);
         const b = p.get('brand');
         const ph = p.get('phone');
-        const lg = p.get('logo');
+        let lg = p.get('logo');
+        
+        // Universal Auto-Logo Resolver:
+        if (!lg && b) {
+          const cleanB = b.toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (cleanB.includes('dynamicmovers')) {
+            lg = 'https://dynamicmoversnyc.com/wp-content/themes/dynamicmovers/images/logo.png';
+          } else {
+            lg = `/api/lead/logo?brand=${encodeURIComponent(b)}`;
+          }
+        }
         window.__PRELOADED_BRAND__ = b;
         window.__PRELOADED_PHONE__ = ph;
         window.__PRELOADED_LOGO__ = lg;
@@ -62,28 +72,27 @@
     })();
   </script>
 
+  <style>
+    :root {
+      --brand-color: #059669;
+      --brand-hover: #059669;
+      --primary: #059669;
+    }
+    .tab-btn.active, .preset-pill.active, .btn-submit, .pill-value {
+      background: #059669 !important;
+    }
+    .brand-icon, .price-val {
+      color: #059669 !important;
+    }
+  </style>
   <script>
-    window.__CLIENT_BRAND__ = 'Dynamic Movers NYC';
-    window.__CLIENT_PHONE__ = '(212) 203-6365';
-    window.__CLIENT_LOGO__ = 'https://dynamicmoversnyc.com/wp-content/themes/dynamicmovers/images/logo.png';
-    document.addEventListener('DOMContentLoaded', function() {
-      const img = document.getElementById('brand-logo-img');
-      const icon = document.getElementById('brand-lucide-icon');
-      const box = document.getElementById('brand-avatar-box');
-      if (img) {
-        img.src = 'https://dynamicmoversnyc.com/wp-content/themes/dynamicmovers/images/logo.png';
-        img.style.display = 'block';
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'contain';
-        if (icon) icon.style.display = 'none';
-        if (box) {
-          box.style.background = '#ffffff';
-          box.style.padding = '4px';
-          box.style.border = '1px solid rgba(255,255,255,0.2)';
-        }
-      }
-    });
+    window.OMNI_CONFIG = {
+      brand: 'Dynamic Movers NYC',
+      phone: '12122036365',
+      multiplier: 1.0,
+      currency: '$',
+      color: '#059669'
+    };
   </script>
 
 </head>
@@ -92,8 +101,9 @@
   <header class="header">
     <div class="container header-container">
       <div class="brand-group">
-        <div class="brand-avatar" id="brand-avatar-box" style="background: #ffffff !important; padding: 5px !important; border-radius: 12px !important; display: flex !important; align-items: center !important; justify-content: center !important; width: 50px !important; height: 50px !important; box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;">
-          <img src="logo.png?v=2026.1" alt="Dynamic Movers NYC Logo" id="brand-logo-img" class="brand-logo-img" style="display: block !important; width: 100% !important; height: 100% !important; object-fit: contain !important;">
+        <div class="brand-avatar" id="brand-avatar-box">
+          <i data-lucide="truck" id="brand-lucide-icon" class="brand-icon"></i>
+          <img src="" alt="Brand Logo" id="brand-logo-img" class="brand-logo-img" style="display: none;">
         </div>
         <div>
           <div class="brand-title-row">
@@ -102,7 +112,7 @@
               <i data-lucide="check-circle" class="badge-icon"></i> Verified Mover
             </span>
           </div>
-          <p class="brand-tagline" id="brand-tagline">NYC's Top-Rated Licensed & Insured Moving Specialists</p>
+          <p class="brand-tagline" id="brand-tagline">Licensed, Insured & Trusted Professional Moving Services</p>
         </div>
       </div>
 
@@ -119,7 +129,7 @@
         </div>
         <a href="tel:18005550199" class="btn-call" id="brand-phone-btn" href="tel:12122036365">
           <i data-lucide="phone-call" class="btn-icon"></i>
-          <span id="brand-phone-text">(212) 203-6365</span>
+          <span id="brand-phone-text">12122036365</span>
         </a>
       </div>
     </div>
@@ -502,15 +512,3 @@
   </script>
 </body>
 </html>
-<script>
-window.addEventListener('load', function() {
-  const box = document.getElementById('brand-avatar-box');
-  const img = document.getElementById('brand-logo-img');
-  const icon = document.getElementById('brand-lucide-icon');
-  if (icon) icon.remove();
-  if (img) {
-    img.src = 'logo.png?v=2026.1';
-    img.style.display = 'block';
-  }
-});
-</script>
